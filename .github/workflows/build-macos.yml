@@ -95,22 +95,22 @@ jobs:
                   build-macos/entry.py
           }
 
-          if build_arch universal2 sbusta-p7m; then
+          if build_arch universal2 apri-p7m; then
               echo "build universal2 diretto riuscito"
           else
               echo "build universal2 diretto fallito: ripiego su arm64 + x86_64 separati, poi lipo"
-              build_arch arm64 sbusta-p7m-arm64
-              build_arch x86_64 sbusta-p7m-x86_64
-              lipo -create -output build-macos/dist/sbusta-p7m \
-                  build-macos/dist/sbusta-p7m-arm64 \
-                  build-macos/dist/sbusta-p7m-x86_64
+              build_arch arm64 apri-p7m-arm64
+              build_arch x86_64 apri-p7m-x86_64
+              lipo -create -output build-macos/dist/apri-p7m \
+                  build-macos/dist/apri-p7m-arm64 \
+                  build-macos/dist/apri-p7m-x86_64
           fi
 
       - name: Verify the built CLI is a universal2 binary
         run: |
           set -eu
-          file build-macos/dist/sbusta-p7m
-          file build-macos/dist/sbusta-p7m | grep -q "2 architectures" || {
+          file build-macos/dist/apri-p7m
+          file build-macos/dist/apri-p7m | grep -q "2 architectures" || {
               echo "error: PyInstaller executable is not universal2" >&2
               exit 1
           }
@@ -118,28 +118,28 @@ jobs:
       - name: Rebuild Help Book search index
         run: |
           set -eu
-          cd "macos-launcher/sbusta-p7m Help.help/Contents/Resources/it.lproj"
-          hiutil -Cf "sbusta-p7m Help.helpindex" .
+          cd "macos-launcher/apri-p7m Help.help/Contents/Resources/it.lproj"
+          hiutil -Cf "apri-p7m Help.helpindex" .
 
       - name: Wrap with Platypus
         run: |
           set -eu
           platypus \
-              -a "sbusta-p7m" \
+              -a "apri-p7m" \
               -o "None" \
               -p /bin/sh \
               -D \
               -R \
               -X "p7m" \
-              -f build-macos/dist/sbusta-p7m \
-              -f "macos-launcher/sbusta-p7m Help.help" \
+              -f build-macos/dist/apri-p7m \
+              -f "macos-launcher/apri-p7m Help.help" \
               -i "macos-launcher/AppIcon.icns" \
               -u "TM-IA" \
               -V "${{ inputs.version }}" \
-              -I "com.tm-ia.sbusta-p7m" \
+              -I "com.tm-ia.apri-p7m" \
               -y \
               macos-launcher/wrapper.sh \
-              build-macos/dist/sbusta-p7m.app
+              build-macos/dist/apri-p7m.app
 
       - name: Register Help Book in Info.plist
         # Not exposed as a platypus CLI flag, same as
@@ -148,25 +148,25 @@ jobs:
         # system's native Aiuto menu uses to find this Help Book.
         run: |
           set -eu
-          PLIST="build-macos/dist/sbusta-p7m.app/Contents/Info.plist"
+          PLIST="build-macos/dist/apri-p7m.app/Contents/Info.plist"
           /usr/libexec/PlistBuddy -c "Delete :CFBundleHelpBookFolder" "$PLIST" 2>/dev/null || true
           /usr/libexec/PlistBuddy -c "Delete :CFBundleHelpBookName" "$PLIST" 2>/dev/null || true
-          /usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookFolder string 'sbusta-p7m Help.help'" "$PLIST"
-          /usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookName string 'com.tm-ia.sbusta-p7m.help'" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookFolder string 'apri-p7m Help.help'" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookName string 'com.tm-ia.apri-p7m.help'" "$PLIST"
 
       - name: Verify the .app bundle
         run: |
           set -eu
-          test -d build-macos/dist/sbusta-p7m.app
-          test -x "build-macos/dist/sbusta-p7m.app/Contents/Resources/sbusta-p7m"
-          test -d "build-macos/dist/sbusta-p7m.app/Contents/Resources/sbusta-p7m Help.help"
-          file "build-macos/dist/sbusta-p7m.app/Contents/Resources/sbusta-p7m"
+          test -d build-macos/dist/apri-p7m.app
+          test -x "build-macos/dist/apri-p7m.app/Contents/Resources/apri-p7m"
+          test -d "build-macos/dist/apri-p7m.app/Contents/Resources/apri-p7m Help.help"
+          file "build-macos/dist/apri-p7m.app/Contents/Resources/apri-p7m"
           echo ".app costruito interamente in CI, Help Book incluso"
 
       - name: Zip the .app bundle (ditto preserves the .app folder name)
         # actions/upload-artifact uploads a given folder's *contents*,
         # not the folder itself — pointing it straight at
-        # build-macos/dist/sbusta-p7m.app would drop the ".app"-named
+        # build-macos/dist/apri-p7m.app would drop the ".app"-named
         # wrapper folder from the downloaded artifact. Zipping the
         # bundle ourselves with ditto (Apple's own tool for this,
         # preserves resource forks/xattrs a generic zip can lose) keeps
@@ -174,10 +174,10 @@ jobs:
         run: |
           set -eu
           ditto -c -k --sequesterRsrc --keepParent \
-              build-macos/dist/sbusta-p7m.app \
-              build-macos/dist/sbusta-p7m.app.zip
+              build-macos/dist/apri-p7m.app \
+              build-macos/dist/apri-p7m.app.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: sbusta-p7m-macos
-          path: build-macos/dist/sbusta-p7m.app.zip
+          name: apri-p7m-macos
+          path: build-macos/dist/apri-p7m.app.zip

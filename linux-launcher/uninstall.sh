@@ -3,9 +3,9 @@
 
 set -eu
 
-INSTALL_DIR="$HOME/.local/share/sbusta-p7m"
-BIN_FILE="$HOME/.local/bin/sbusta-p7m"
-DESKTOP_FILE="$HOME/.local/share/applications/sbusta-p7m.desktop"
+INSTALL_DIR="$HOME/.local/share/apri-p7m"
+BIN_FILE="$HOME/.local/bin/apri-p7m"
+DESKTOP_FILE="$HOME/.local/share/applications/apri-p7m.desktop"
 
 rm -rf "$INSTALL_DIR"
 rm -f "$BIN_FILE"

@@ -6,7 +6,7 @@ point imports the package normally instead."""
 
 import sys
 
-from sbusta_p7m.cli import main
+from apri_p7m.cli import main
 
 if __name__ == "__main__":
     sys.exit(main())

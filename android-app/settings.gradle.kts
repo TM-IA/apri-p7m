@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sbusta-p7m"
+rootProject.name = "apri-p7m"
 include(":app")

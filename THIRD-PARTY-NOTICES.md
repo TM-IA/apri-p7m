@@ -1,4 +1,4 @@
-The macOS app bundle (`sbusta-p7m.app`) embeds a bootstrap binary
+The macOS app bundle (`apri-p7m.app`) embeds a bootstrap binary
 built by [Platypus](https://sveinbjorn.org/platypus), used under its
 BSD 3-Clause license, reproduced below verbatim as required by that
 license's redistribution clause.

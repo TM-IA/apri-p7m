@@ -1,5 +1,5 @@
 #!/bin/sh
-# Platypus wrapper: native dialogs around the bundled sbusta-p7m.
+# Platypus wrapper: native dialogs around the bundled apri-p7m.
 
 set -u
 
@@ -8,12 +8,12 @@ set -u
 # bundled PyInstaller executable sits right here, referenced with a
 # relative path — no PATH resolution, no external installation needed
 # on the recipient's system.
-CLI="./sbusta-p7m"
+CLI="./apri-p7m"
 
-# Same path sbusta_p7m/preferenze.py's cartella_config() computes on
+# Same path apri_p7m/preferenze.py's cartella_config() computes on
 # macOS. Read directly here (see leggi_preferenza below) instead of
 # always going through the CLI just to read a value back.
-FILE_PREFERENZE="$HOME/Library/Application Support/sbusta-p7m/preferenze.json"
+FILE_PREFERENZE="$HOME/Library/Application Support/apri-p7m/preferenze.json"
 
 leggi_preferenza() {
     # $1: chiave ("destinazione", "log" o "modalita"). Legge preferenze.json
@@ -22,7 +22,7 @@ leggi_preferenza() {
     # impiega circa 1-1.5s ad avviarsi (scompatta l'intero runtime
     # Python a ogni lancio), troppo lento da fare più volte per
     # aprire un dialogo. Formato JSON controllato da noi stessi
-    # (sbusta_p7m/preferenze.py, json.dump(..., indent=2), un dict
+    # (apri_p7m/preferenze.py, json.dump(..., indent=2), un dict
     # piatto) — non un parser JSON generico. La scrittura
     # (--set-preferenza) resta invece sul CLI: molto meno frequente,
     # un costo accettabile per una modifica reale dell'utente.
@@ -46,7 +46,7 @@ scrivi_log_e_mostra() {
     cartella_log="${cartella_log%/}"
 
     log_abilitato=$(leggi_preferenza log)
-    log_path="$cartella_log/sbusta-p7m-log.txt"
+    log_path="$cartella_log/apri-p7m-log.txt"
     if [ "$log_abilitato" != "off" ]; then
         {
             echo "=== $(date '+%Y-%m-%d %H:%M:%S') ==="
@@ -75,15 +75,15 @@ Dettagli: $log_path"
     export P7M_OUTPUT="$riepilogo$dettagli"
 
     # When at least one file was saved to the fallback folder (see
-    # sbusta_p7m/cli.py's "fallback: <cartella>" line), offer a button
+    # apri_p7m/cli.py's "fallback: <cartella>" line), offer a button
     # to open it directly instead of leaving the user to find it.
     cartella_fallback=$(printf '%s\n' "$testo_completo" | grep '^fallback:' | tail -1 | sed 's/^fallback: //')
 
     if [ "$esito_totale" -eq 0 ]; then
-        titolo="sbusta-p7m"
+        titolo="apri-p7m"
         icona=""
     else
-        titolo="sbusta-p7m — completato con errori"
+        titolo="apri-p7m — completato con errori"
         icona=" with icon caution"
     fi
 
@@ -140,7 +140,7 @@ mostra_preferenze() {
 
         scelta=$(osascript <<EOF 2>/dev/null
 tell application "System Events" to activate
-set sceltaLista to choose from list {"$voce_dest", "$voce_log", "$voce_modalita"} with prompt "Preferenze sbusta-p7m" with title "sbusta-p7m — Preferenze" cancel button name "Indietro"
+set sceltaLista to choose from list {"$voce_dest", "$voce_log", "$voce_modalita"} with prompt "Preferenze apri-p7m" with title "apri-p7m — Preferenze" cancel button name "Indietro"
 if sceltaLista is false then
     return "CHIUDI"
 else
@@ -266,7 +266,7 @@ while :; do  # top level: File / Cartella / Preferenze
     if [ "$modalita" = "Chiedi" ]; then
         tipo=$(osascript <<'EOF' 2>/dev/null
 tell application "System Events" to activate
-set scelta to choose from list {"File", "Cartella", "Preferenze"} with prompt "Estrarre uno o più file .p7m, o tutti quelli in una o più cartelle?" with title "sbusta-p7m"
+set scelta to choose from list {"File", "Cartella", "Preferenze"} with prompt "Estrarre uno o più file .p7m, o tutti quelli in una o più cartelle?" with title "apri-p7m"
 if scelta is false then
     return "ANNULLA"
 else
@@ -291,7 +291,7 @@ EOF
         fi
         scelta_rapida=$(osascript <<EOF 2>/dev/null
 tell application "System Events" to activate
-display dialog "$testo_rapido" buttons {"Annulla", "Preferenze...", "Seleziona..."} default button "Seleziona..." cancel button "Annulla" with title "sbusta-p7m"
+display dialog "$testo_rapido" buttons {"Annulla", "Preferenze...", "Seleziona..."} default button "Seleziona..." cancel button "Annulla" with title "apri-p7m"
 button returned of result
 EOF
         ) || exit 0
@@ -345,7 +345,7 @@ EOF
         while :; do  # destination folder, applies to the whole selection
             scelta_dest=$(osascript <<'EOF' 2>/dev/null
 tell application "System Events" to activate
-display dialog "Cartella di destinazione?" buttons {"Annulla", "Cartella sorgente", "Scegli..."} default button "Cartella sorgente" cancel button "Annulla" with title "sbusta-p7m"
+display dialog "Cartella di destinazione?" buttons {"Annulla", "Cartella sorgente", "Scegli..."} default button "Cartella sorgente" cancel button "Annulla" with title "apri-p7m"
 button returned of result
 EOF
             )

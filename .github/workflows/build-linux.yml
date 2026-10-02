@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'sbusta_p7m/**'
+      - 'apri_p7m/**'
       - 'linux-launcher/**'
       - 'build-linux/**'
       - '.github/workflows/build-linux.yml'
@@ -44,11 +44,11 @@ jobs:
           set -eu
           printf '%%PDF-1.4\ntest content\n' > /tmp/test.pdf
           openssl req -x509 -newkey rsa:2048 -keyout /tmp/key.pem -out /tmp/cert.pem \
-              -days 1 -nodes -subj "/CN=CI Test Signer/O=sbusta-p7m CI"
+              -days 1 -nodes -subj "/CN=CI Test Signer/O=apri-p7m CI"
           openssl cms -sign -in /tmp/test.pdf -signer /tmp/cert.pem -inkey /tmp/key.pem \
               -outform DER -binary -nodetach -out /tmp/test.p7m
-          PKG_DIR="build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}"
-          "$PKG_DIR/sbusta-p7m" /tmp/test.p7m -d /tmp/out
+          PKG_DIR="build-linux/dist/apri-p7m-linux-${{ matrix.arch }}"
+          "$PKG_DIR/apri-p7m" /tmp/test.p7m -d /tmp/out
           test -f /tmp/out/test/test.pdf
           test -f /tmp/out/test/test.json
           grep -q "CI Test Signer" /tmp/out/test/test.json
@@ -59,10 +59,10 @@ jobs:
           set -eu
           mkdir -p /tmp/readonly
           chmod 000 /tmp/readonly
-          FALLBACK="$HOME/.local/share/sbusta-p7m/estrazioni-fallback"
+          FALLBACK="$HOME/.local/share/apri-p7m/estrazioni-fallback"
           rm -rf "$FALLBACK"
-          PKG_DIR="build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}"
-          output=$("$PKG_DIR/sbusta-p7m" /tmp/test.p7m -d /tmp/readonly)
+          PKG_DIR="build-linux/dist/apri-p7m-linux-${{ matrix.arch }}"
+          output=$("$PKG_DIR/apri-p7m" /tmp/test.p7m -d /tmp/readonly)
           echo "$output" | grep -q "^fallback: $FALLBACK\$"
           test -f "$FALLBACK/test/test.pdf"
           test -f "$FALLBACK/test/test.json"
@@ -73,14 +73,14 @@ jobs:
         run: |
           set -eu
           openssl req -x509 -newkey rsa:2048 -keyout /tmp/key2.pem -out /tmp/cert2.pem \
-              -days 1 -nodes -subj "/CN=CI Test Cosigner/O=sbusta-p7m CI"
+              -days 1 -nodes -subj "/CN=CI Test Cosigner/O=apri-p7m CI"
           openssl cms -sign -in /tmp/test.pdf -signer /tmp/cert.pem -inkey /tmp/key.pem \
               -outform DER -binary -nodetach -out /tmp/step1.p7m
           openssl cms -resign -in /tmp/step1.p7m -inform DER \
               -signer /tmp/cert2.pem -inkey /tmp/key2.pem \
               -outform DER -binary -nodetach -out /tmp/cofirmato.p7m
-          PKG_DIR="build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}"
-          "$PKG_DIR/sbusta-p7m" /tmp/cofirmato.p7m -d /tmp/out-cofirmato
+          PKG_DIR="build-linux/dist/apri-p7m-linux-${{ matrix.arch }}"
+          "$PKG_DIR/apri-p7m" /tmp/cofirmato.p7m -d /tmp/out-cofirmato
           python3 -c "
           import json
           d = json.load(open('/tmp/out-cofirmato/cofirmato/cofirmato.json'))
@@ -94,8 +94,8 @@ jobs:
       - name: Smoke test the hidden preferences contract
         run: |
           set -eu
-          PKG_DIR="build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}"
-          BIN="$PKG_DIR/sbusta-p7m"
+          PKG_DIR="build-linux/dist/apri-p7m-linux-${{ matrix.arch }}"
+          BIN="$PKG_DIR/apri-p7m"
           [ "$("$BIN" --get-preferenza log)" = "on" ]
           [ -z "$("$BIN" --get-preferenza destinazione)" ]
           "$BIN" --set-preferenza destinazione /tmp/una-cartella
@@ -115,13 +115,13 @@ jobs:
       - name: Check package contents
         run: |
           set -eu
-          PKG_DIR="build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}"
-          for f in sbusta-p7m wrapper.sh help/index.html help/index.txt sbusta-p7m.desktop install.sh uninstall.sh icon.png; do
+          PKG_DIR="build-linux/dist/apri-p7m-linux-${{ matrix.arch }}"
+          for f in apri-p7m wrapper.sh help/index.html help/index.txt apri-p7m.desktop install.sh uninstall.sh icon.png; do
               test -f "$PKG_DIR/$f" || { echo "manca $f nel pacchetto" >&2; exit 1; }
           done
           echo "struttura pacchetto OK"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: sbusta-p7m-linux-${{ matrix.arch }}
-          path: build-linux/dist/sbusta-p7m-linux-${{ matrix.arch }}.tar.gz
+          name: apri-p7m-linux-${{ matrix.arch }}
+          path: build-linux/dist/apri-p7m-linux-${{ matrix.arch }}.tar.gz

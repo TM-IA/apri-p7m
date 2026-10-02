@@ -1,5 +1,5 @@
 #!/bin/sh
-# zenity wrapper: native dialogs around the bundled sbusta-p7m
+# zenity wrapper: native dialogs around the bundled apri-p7m
 # (Linux). Ported from the macOS Platypus wrapper — same logic,
 # adapted to zenity's button model (see notes below). Built and
 # exercised for the first time via GitHub Actions CI; no local Linux
@@ -13,13 +13,13 @@ set -u
 # necessarily set cwd to the install folder the way Platypus does on
 # macOS by running the script from Resources/).
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-CLI="$HOME/.local/bin/sbusta-p7m"
+CLI="$HOME/.local/bin/apri-p7m"
 HELP_TXT="$SCRIPT_DIR/help/index.txt"
 
-# Same path sbusta_p7m/preferenze.py's cartella_config() computes on
+# Same path apri_p7m/preferenze.py's cartella_config() computes on
 # Linux (XDG). Read directly here (see leggi_preferenza below) instead
 # of always going through the CLI just to read a value back.
-FILE_PREFERENZE="${XDG_CONFIG_HOME:-$HOME/.config}/sbusta-p7m/preferenze.json"
+FILE_PREFERENZE="${XDG_CONFIG_HOME:-$HOME/.config}/apri-p7m/preferenze.json"
 
 leggi_preferenza() {
     # $1: chiave ("destinazione" o "log"). Legge preferenze.json
@@ -28,7 +28,7 @@ leggi_preferenza() {
     # impiega circa 1-1.5s ad avviarsi (scompatta l'intero runtime
     # Python a ogni lancio), troppo lento da fare più volte per
     # aprire un dialogo. Formato JSON controllato da noi stessi
-    # (sbusta_p7m/preferenze.py, json.dump(..., indent=2), un dict
+    # (apri_p7m/preferenze.py, json.dump(..., indent=2), un dict
     # piatto) — non un parser JSON generico. La scrittura
     # (--set-preferenza) resta invece sul CLI: molto meno frequente,
     # un costo accettabile per una modifica reale dell'utente.
@@ -52,7 +52,7 @@ scrivi_log_e_mostra() {
     cartella_log="${cartella_log%/}"
 
     log_abilitato=$(leggi_preferenza log)
-    log_path="$cartella_log/sbusta-p7m-log.txt"
+    log_path="$cartella_log/apri-p7m-log.txt"
     if [ "$log_abilitato" != "off" ]; then
         {
             echo "=== $(date '+%Y-%m-%d %H:%M:%S') ==="
@@ -75,7 +75,7 @@ Dettagli: $log_path"
     fi
 
     # When at least one file was saved to the fallback folder (see
-    # sbusta_p7m/cli.py's "fallback: <cartella>" line), offer a button
+    # apri_p7m/cli.py's "fallback: <cartella>" line), offer a button
     # to open it directly instead of leaving the user to find it.
     # --info/--error only support a single OK button, so switch to
     # --question (ok-label/cancel-label repurposed, no real "cancel"
@@ -85,10 +85,10 @@ Dettagli: $log_path"
 
     if [ -n "$cartella_fallback" ]; then
         if [ "$esito_totale" -eq 0 ]; then
-            titolo="sbusta-p7m"
+            titolo="apri-p7m"
             icona=""
         else
-            titolo="sbusta-p7m — completato con errori"
+            titolo="apri-p7m — completato con errori"
             icona="--icon-name=dialog-error"
         fi
         zenity --question --title="$titolo" $icona \
@@ -97,10 +97,10 @@ Dettagli: $log_path"
         ret=$?
         [ "$ret" -eq 0 ] && xdg-open "$cartella_fallback" >/dev/null 2>&1 &
     elif [ "$esito_totale" -eq 0 ]; then
-        zenity --info --title="sbusta-p7m" \
+        zenity --info --title="apri-p7m" \
             --text="$riepilogo$dettagli" 2>/dev/null
     else
-        zenity --error --title="sbusta-p7m — completato con errori" \
+        zenity --error --title="apri-p7m — completato con errori" \
             --text="$riepilogo$dettagli" 2>/dev/null
     fi
 }
@@ -132,7 +132,7 @@ mostra_preferenze() {
             log_testo="attivo"
         fi
 
-        risposta=$(zenity --question --title="sbusta-p7m — Preferenze" \
+        risposta=$(zenity --question --title="apri-p7m — Preferenze" \
             --text="Cartella predefinita: $dest_testo
 Log: $log_testo" \
             --ok-label="Chiudi" --cancel-label="Annulla" \
@@ -228,7 +228,7 @@ while :; do  # level 1: File / Cartella / Aiuto / Preferenze
     # zenity exits immediately with "--no-cancel is not supported for
     # this dialog"), so the Cancel button can't be hidden: it stays
     # visible, relabeled "Annulla".
-    risposta=$(zenity --question --title="sbusta-p7m" \
+    risposta=$(zenity --question --title="apri-p7m" \
         --text="Estrarre un file .p7m singolo o tutti i file in una cartella?" \
         --ok-label="File" --cancel-label="Annulla" \
         --extra-button="Cartella" --extra-button="Aiuto" --extra-button="Preferenze..." 2>/dev/null)
@@ -238,7 +238,7 @@ while :; do  # level 1: File / Cartella / Aiuto / Preferenze
     elif [ "$risposta" = "Cartella" ]; then
         tipo="Cartella"
     elif [ "$risposta" = "Aiuto" ]; then
-        zenity --text-info --title="sbusta-p7m — Aiuto" \
+        zenity --text-info --title="apri-p7m — Aiuto" \
             --filename="$HELP_TXT" --width=560 --height=440 2>/dev/null
         continue
     elif [ "$risposta" = "Preferenze..." ]; then
@@ -276,7 +276,7 @@ while :; do  # level 1: File / Cartella / Aiuto / Preferenze
             destinazione=""
             annullato=0
             while :; do  # level 3: destination folder
-                scelta=$(zenity --question --title="sbusta-p7m" \
+                scelta=$(zenity --question --title="apri-p7m" \
                     --text="Cartella di destinazione?" \
                     --ok-label="Cartella sorgente" --cancel-label="Annulla" \
                     --extra-button="Scegli..." 2>/dev/null)

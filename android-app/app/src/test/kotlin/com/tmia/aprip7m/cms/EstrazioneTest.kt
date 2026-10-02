@@ -1,4 +1,4 @@
-package com.tmia.sbustap7m.cms
+package com.tmia.aprip7m.cms
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows

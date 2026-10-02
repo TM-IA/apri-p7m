@@ -6,10 +6,10 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:allowBackup="false"
-        android:theme="@style/Theme.SbustaP7m">
+        android:theme="@style/Theme.ApriP7m">
 
         <activity
-            android:name=".SbustaP7mActivity"
+            android:name=".ApriP7mActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

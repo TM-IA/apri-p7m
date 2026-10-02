@@ -1,4 +1,4 @@
-sbusta-p7m — Aiuto
+apri-p7m — Aiuto
 
 Estrae il PDF contenuto in una busta .p7m (firma digitale italiana), insieme ai metadati del firmatario, salvati in un file .json a lato.
 
@@ -13,7 +13,7 @@ Per ogni nome.p7m, una sottocartella nome/ contenente nome.pdf e nome.json (meta
 
 LOG
 
-Ogni esecuzione aggiunge un blocco datato a sbusta-p7m-log.txt, nella cartella di destinazione — utile per rivedere cosa è stato estratto ed eventuali errori.
+Ogni esecuzione aggiunge un blocco datato a apri-p7m-log.txt, nella cartella di destinazione — utile per rivedere cosa è stato estratto ed eventuali errori.
 
 LIMITI NOTI
 
