@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key>
-    <string>com.tm-ia.sbusta-p7m.help</string>
+    <string>com.tm-ia.apri-p7m.help</string>
     <key>CFBundleName</key>
-    <string>sbusta-p7m Help</string>
+    <string>apri-p7m Help</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleSignature</key>
@@ -15,9 +15,9 @@
     <key>HPDBookAccessPath</key>
     <string>index.html</string>
     <key>HPDBookIndexPath</key>
-    <string>sbusta-p7m Help.helpindex</string>
+    <string>apri-p7m Help.helpindex</string>
     <key>HPDBookTitle</key>
-    <string>sbusta-p7m Help</string>
+    <string>apri-p7m Help</string>
     <key>HPDBookType</key>
     <string>3</string>
 </dict>

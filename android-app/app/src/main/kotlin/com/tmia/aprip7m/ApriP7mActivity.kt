@@ -1,4 +1,4 @@
-package com.tmia.sbustap7m
+package com.tmia.aprip7m
 
 import android.content.Intent
 import android.database.Cursor
@@ -15,11 +15,11 @@ import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
-import com.tmia.sbustap7m.cms.Firmatario
-import com.tmia.sbustap7m.cms.P7mContentError
-import com.tmia.sbustap7m.cms.P7mFormatError
-import com.tmia.sbustap7m.cms.RisultatoEstrazione
-import com.tmia.sbustap7m.cms.estrai
+import com.tmia.aprip7m.cms.Firmatario
+import com.tmia.aprip7m.cms.P7mContentError
+import com.tmia.aprip7m.cms.P7mFormatError
+import com.tmia.aprip7m.cms.RisultatoEstrazione
+import com.tmia.aprip7m.cms.estrai
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -38,7 +38,7 @@ import java.io.FileOutputStream
  * sandboxed storage model doesn't support that the way a desktop
  * filesystem does (see plan decisions).
  */
-class SbustaP7mActivity : AppCompatActivity() {
+class ApriP7mActivity : AppCompatActivity() {
 
     private var risultatoCorrente: RisultatoEstrazione? = null
     private var nomeBaseCorrente: String = "documento"
@@ -75,7 +75,7 @@ class SbustaP7mActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sbusta_p7m)
+        setContentView(R.layout.activity_apri_p7m)
 
         // targetSdk 35+ enforces edge-to-edge by default: content draws
         // behind the status bar unless it accounts for the inset
@@ -251,7 +251,7 @@ class SbustaP7mActivity : AppCompatActivity() {
                 "Data firma: ${f.signingTime ?: "-"}"
         }
 
-    /** Same JSON schema as sbusta_p7m/core.py's estrai(): "firmatari"
+    /** Same JSON schema as apri_p7m/core.py's estrai(): "firmatari"
      * array with the same field names, "file_originale"/"pdf_estratto"
      * kept parallel to the Python side even though this JSON export is
      * an optional user action here, not the primary output. */

@@ -1,4 +1,4 @@
-# sbusta-p7m
+# apri-p7m
 
 Documentazione in inglese più sotto in questo stesso file.
 
@@ -27,17 +27,17 @@ pacchettizzamento potrebbero ancora cambiare.
 
 - Python 3.9+
 - [pipx](https://pipx.pypa.io/) (consigliato per un comando
-  `sbusta-py-p7m` autonomo), oppure semplice `pip`/`venv`
+  `apri-py-p7m` autonomo), oppure semplice `pip`/`venv`
 
 ## Installazione
 
 ```sh
 git clone <repo-url>
-cd sbusta-p7m
+cd apri-p7m
 pipx install .
 ```
 
-Installa un comando `sbusta-py-p7m` autonomo, indipendente da
+Installa un comando `apri-py-p7m` autonomo, indipendente da
 qualunque virtual environment di progetto. Per recepire modifiche
 locali al sorgente, reinstalla con `pipx install . --force`.
 
@@ -46,14 +46,14 @@ In alternativa, senza pipx:
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python3 -m sbusta_p7m.cli <args>
+.venv/bin/python3 -m apri_p7m.cli <args>
 ```
 
 ## Utilizzo
 
 ```sh
-sbusta-py-p7m <file.p7m>
-sbusta-py-p7m <cartella> [-r] [-d <destinazione>]
+apri-py-p7m <file.p7m>
+apri-py-p7m <cartella> [-r] [-d <destinazione>]
 ```
 
 - `percorso` (posizionale): un singolo file `.p7m`, o una cartella. Se
@@ -113,12 +113,12 @@ stato possibile risolvere è `null`, mai omesso.
 Un `.app` autonomo, avviabile con doppio clic (nessun Python richiesto
 sul sistema di chi lo riceve):
 
-1. Scarica `sbusta-p7m.app.zip` dall'[ultima release](../../releases/latest)
+1. Scarica `apri-p7m.app.zip` dall'[ultima release](../../releases/latest)
    ed estrailo.
 2. Non essendo firmata digitalmente, macOS Gatekeeper blocca il primo
    avvio. Rimuovi il flag di quarantena una volta sola:
    ```sh
-   xattr -d com.apple.quarantine /path/to/sbusta-p7m.app
+   xattr -d com.apple.quarantine /path/to/apri-p7m.app
    ```
 3. Doppio clic per avviarla, o trascina un file `.p7m` sull'icona
    dell'app.
@@ -136,7 +136,7 @@ e Platypus stesso (con il suo tool a riga di comando installato):
 build-macos/build.sh
 ```
 
-Produce `build-macos/dist/sbusta-p7m.app`. L'icona
+Produce `build-macos/dist/apri-p7m.app`. L'icona
 (`macos-launcher/AppIcon.icns`) fa parte di questo repository.
 
 Il bundle dell'app incorpora un binario costruito da
@@ -152,23 +152,23 @@ di Aiuto.
 Un tarball autonomo (nessun Python richiesto sul sistema di chi lo
 riceve), per `x86_64` e `aarch64`:
 
-1. Scarica `sbusta-p7m-linux-x86_64.tar.gz` o
-   `sbusta-p7m-linux-aarch64.tar.gz` (corrispondente all'architettura
+1. Scarica `apri-p7m-linux-x86_64.tar.gz` o
+   `apri-p7m-linux-aarch64.tar.gz` (corrispondente all'architettura
    della tua macchina) dall'[ultima release](../../releases/latest).
-2. Estrailo: `tar xzf sbusta-p7m-linux-<arch>.tar.gz`.
+2. Estrailo: `tar xzf apri-p7m-linux-<arch>.tar.gz`.
 3. Installa per utente, senza bisogno di root:
    ```sh
-   cd sbusta-p7m-linux-<arch>
+   cd apri-p7m-linux-<arch>
    ./install.sh
    ```
    Copia il wrapper grafico, l'aiuto e l'icona in
-   `~/.local/share/sbusta-p7m/`, l'eseguibile autonomo `sbusta-p7m` in
-   `~/.local/bin/sbusta-p7m` (utilizzabile anche direttamente da
-   terminale, stessa interfaccia CLI di `sbusta-py-p7m` sopra ma senza
+   `~/.local/share/apri-p7m/`, l'eseguibile autonomo `apri-p7m` in
+   `~/.local/bin/apri-p7m` (utilizzabile anche direttamente da
+   terminale, stessa interfaccia CLI di `apri-py-p7m` sopra ma senza
    dipendenza da Python), e registra una voce di menu `.desktop`
    (associata anche ai file `.p7m`, così compare in "Apri con" del
    file manager).
-4. Per rimuoverlo in seguito: `~/.local/share/sbusta-p7m/uninstall.sh`.
+4. Per rimuoverlo in seguito: `~/.local/share/apri-p7m/uninstall.sh`.
 
 I dialoghi usano `zenity`; se non è già installato, installalo prima
 tramite il gestore pacchetti della tua distribuzione (es.
@@ -187,7 +187,7 @@ sistema, stesso vincolo di macOS) si registra per aprire direttamente
 gli allegati `.p7m` dalle app di posta, e compare anche come app
 normale con una propria icona nel launcher:
 
-1. Scarica `sbusta-p7m.apk` dall'[ultima release](../../releases/latest).
+1. Scarica `apri-p7m.apk` dall'[ultima release](../../releases/latest).
 2. Abilita "Installa da origini sconosciute" per il file (non è
    installata dal Play Store/F-Droid), poi installalo.
 3. Tocca un allegato `.p7m` in un'app di posta per aprirlo
@@ -240,18 +240,18 @@ Interface and packaging may still change.
 ## Requirements
 
 - Python 3.9+
-- [pipx](https://pipx.pypa.io/) (recommended for a standalone `sbusta-py-p7m`
+- [pipx](https://pipx.pypa.io/) (recommended for a standalone `apri-py-p7m`
   command), or plain `pip`/`venv`
 
 ## Install
 
 ```sh
 git clone <repo-url>
-cd sbusta-p7m
+cd apri-p7m
 pipx install .
 ```
 
-This installs a standalone `sbusta-py-p7m` command, independent from any
+This installs a standalone `apri-py-p7m` command, independent from any
 project virtual environment. To pick up local source changes, reinstall
 with `pipx install . --force`.
 
@@ -260,14 +260,14 @@ Alternatively, without pipx:
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python3 -m sbusta_p7m.cli <args>
+.venv/bin/python3 -m apri_p7m.cli <args>
 ```
 
 ## Usage
 
 ```sh
-sbusta-py-p7m <file.p7m>
-sbusta-py-p7m <folder> [-r] [-d <destination>]
+apri-py-p7m <file.p7m>
+apri-py-p7m <folder> [-r] [-d <destination>]
 ```
 
 - `percorso` (positional): a single `.p7m` file, or a folder. If it's a
@@ -326,12 +326,12 @@ never omitted.
 A self-contained, double-clickable `.app` (no Python required on the
 recipient's system):
 
-1. Download `sbusta-p7m.app.zip` from the
+1. Download `apri-p7m.app.zip` from the
    [latest release](../../releases/latest) and extract it.
 2. Since it isn't code-signed, macOS Gatekeeper blocks the first
    launch. Clear the quarantine flag once:
    ```sh
-   xattr -d com.apple.quarantine /path/to/sbusta-p7m.app
+   xattr -d com.apple.quarantine /path/to/apri-p7m.app
    ```
 3. Double-click to run, or drag a `.p7m` file onto the app icon.
 
@@ -348,7 +348,7 @@ Platypus itself (with its command-line tool installed):
 build-macos/build.sh
 ```
 
-Produces `build-macos/dist/sbusta-p7m.app`. The icon
+Produces `build-macos/dist/apri-p7m.app`. The icon
 (`macos-launcher/AppIcon.icns`) is part of this repository.
 
 The app bundle embeds a binary built by
@@ -363,22 +363,22 @@ See `macos-launcher/` for the wrapper script and Help content sources.
 A self-contained tarball (no Python required on the recipient's
 system), for both `x86_64` and `aarch64`:
 
-1. Download `sbusta-p7m-linux-x86_64.tar.gz` or
-   `sbusta-p7m-linux-aarch64.tar.gz` (matching your machine's
+1. Download `apri-p7m-linux-x86_64.tar.gz` or
+   `apri-p7m-linux-aarch64.tar.gz` (matching your machine's
    architecture) from the [latest release](../../releases/latest).
-2. Extract it: `tar xzf sbusta-p7m-linux-<arch>.tar.gz`.
+2. Extract it: `tar xzf apri-p7m-linux-<arch>.tar.gz`.
 3. Install per-user, no root required:
    ```sh
-   cd sbusta-p7m-linux-<arch>
+   cd apri-p7m-linux-<arch>
    ./install.sh
    ```
-   Copies the GUI wrapper, help, and icon to `~/.local/share/sbusta-p7m/`,
-   the standalone `sbusta-p7m` executable to `~/.local/bin/sbusta-p7m`
+   Copies the GUI wrapper, help, and icon to `~/.local/share/apri-p7m/`,
+   the standalone `apri-p7m` executable to `~/.local/bin/apri-p7m`
    (also usable directly from a terminal, same CLI interface as
-   `sbusta-py-p7m` above but with no Python dependency), and registers a
+   `apri-py-p7m` above but with no Python dependency), and registers a
    `.desktop` menu entry (also associated with `.p7m` files, so it
    shows up in a file manager's "Open With").
-4. To remove it later: `~/.local/share/sbusta-p7m/uninstall.sh`.
+4. To remove it later: `~/.local/share/apri-p7m/uninstall.sh`.
 
 Dialogs use `zenity`; if it isn't already installed, install it via
 your distro's package manager first (e.g. `apt install zenity`,
@@ -395,7 +395,7 @@ can't run a Python script inside a system extension, same constraint
 as macOS) registers to open `.p7m` attachments directly from mail apps,
 and also appears as a regular app with its own launcher icon:
 
-1. Download `sbusta-p7m.apk` from the
+1. Download `apri-p7m.apk` from the
    [latest release](../../releases/latest).
 2. Enable "Install from unknown sources" for the file (it isn't
    installed from the Play Store/F-Droid), then install it.

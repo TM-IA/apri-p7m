@@ -22,7 +22,7 @@ MAX_LIVELLI = 10
 
 
 class P7mError(Exception):
-    """Base class for all errors raised by sbusta_p7m.core."""
+    """Base class for all errors raised by apri_p7m.core."""
 
 
 class P7mFormatError(P7mError):

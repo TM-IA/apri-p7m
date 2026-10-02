@@ -15,7 +15,7 @@ fi
 
 echo "== 1/4: PyInstaller (universal2) =="
 .venv-build-macos/bin/pyinstaller \
-    --name sbusta-p7m \
+    --name apri-p7m \
     --onefile \
     --target-arch universal2 \
     --paths . \
@@ -26,32 +26,32 @@ echo "== 1/4: PyInstaller (universal2) =="
     build-macos/entry.py
 
 echo "== 2/4: rigenerazione indice di ricerca Help Book =="
-( cd "macos-launcher/sbusta-p7m Help.help/Contents/Resources/it.lproj" && \
-  hiutil -Cf "sbusta-p7m Help.helpindex" . )
+( cd "macos-launcher/apri-p7m Help.help/Contents/Resources/it.lproj" && \
+  hiutil -Cf "apri-p7m Help.helpindex" . )
 
 echo "== 3/4: Platypus =="
 platypus \
-    -a "sbusta-p7m" \
+    -a "apri-p7m" \
     -o "None" \
     -p /bin/sh \
     -D \
     -R \
     -X "p7m" \
-    -f build-macos/dist/sbusta-p7m \
-    -f "macos-launcher/sbusta-p7m Help.help" \
+    -f build-macos/dist/apri-p7m \
+    -f "macos-launcher/apri-p7m Help.help" \
     -i "$ICON" \
     -u "TM-IA" \
     -V "0.1.0" \
-    -I "com.tm-ia.sbusta-p7m" \
+    -I "com.tm-ia.apri-p7m" \
     -y \
     macos-launcher/wrapper.sh \
-    build-macos/dist/sbusta-p7m.app
+    build-macos/dist/apri-p7m.app
 
 echo "== 4/4: registrazione Help Book in Info.plist =="
-PLIST="build-macos/dist/sbusta-p7m.app/Contents/Info.plist"
+PLIST="build-macos/dist/apri-p7m.app/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Delete :CFBundleHelpBookFolder" "$PLIST" 2>/dev/null || true
 /usr/libexec/PlistBuddy -c "Delete :CFBundleHelpBookName" "$PLIST" 2>/dev/null || true
-/usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookFolder string 'sbusta-p7m Help.help'" "$PLIST"
-/usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookName string 'com.tm-ia.sbusta-p7m.help'" "$PLIST"
+/usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookFolder string 'apri-p7m Help.help'" "$PLIST"
+/usr/libexec/PlistBuddy -c "Add :CFBundleHelpBookName string 'com.tm-ia.apri-p7m.help'" "$PLIST"
 
-echo "Fatto: build-macos/dist/sbusta-p7m.app"
+echo "Fatto: build-macos/dist/apri-p7m.app"

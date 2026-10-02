@@ -1,5 +1,5 @@
 """Shared per-platform paths and small persisted preferences for
-sbusta_p7m. Used both as a write fallback (cli.py, when the resolved
+apri_p7m. Used both as a write fallback (cli.py, when the resolved
 destination folder isn't writable) and as the storage for user
 preferences (default destination, logging on/off).
 """
@@ -13,22 +13,22 @@ _FILE_PREFERENZE = "preferenze.json"
 
 
 def cartella_config():
-    """Per-platform config folder for sbusta-p7m (not created here —
+    """Per-platform config folder for apri-p7m (not created here —
     callers create it on first write)."""
     if sys.platform == "darwin":
-        return os.path.join(os.path.expanduser("~"), "Library", "Application Support", "sbusta-p7m")
+        return os.path.join(os.path.expanduser("~"), "Library", "Application Support", "apri-p7m")
     base = os.environ.get("XDG_CONFIG_HOME") or os.path.join(os.path.expanduser("~"), ".config")
-    return os.path.join(base, "sbusta-p7m")
+    return os.path.join(base, "apri-p7m")
 
 
 def cartella_dati():
-    """Per-platform data folder for sbusta-p7m."""
+    """Per-platform data folder for apri-p7m."""
     if sys.platform == "darwin":
         # macOS convention: one Application Support folder for both
         # config and data, unlike Linux's XDG split.
         return cartella_config()
     base = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
-    return os.path.join(base, "sbusta-p7m")
+    return os.path.join(base, "apri-p7m")
 
 
 def cartella_fallback():

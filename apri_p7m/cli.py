@@ -1,4 +1,4 @@
-"""Command-line interface for sbusta_p7m.core.
+"""Command-line interface for apri_p7m.core.
 
 Extracts the PDF and signer metadata from one .p7m file, or from every
 .p7m file found in a folder (optionally recursive). Never raises an
@@ -138,7 +138,7 @@ def _elabora_file(percorso_p7m, cartella_destinazione):
 
 def _gestisci_flag_preferenze(argv):
     """Hidden CLI contract used only by the GUI wrappers (POSIX sh,
-    no JSON parser) to read/write sbusta_p7m.preferenze. Not exposed
+    no JSON parser) to read/write apri_p7m.preferenze. Not exposed
     via argparse/--help: intercepted before it, on purpose."""
     if len(argv) == 2 and argv[0] == "--get-preferenza":
         valore = preferenze.leggi(argv[1])

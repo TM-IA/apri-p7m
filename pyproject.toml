@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sbusta-p7m"
+name = "apri-p7m"
 version = "0.3.0"
 description = "Extract the PDF and signer metadata embedded in .p7m (CMS/PKCS#7) envelopes"
 requires-python = ">=3.9"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-sbusta-py-p7m = "sbusta_p7m.cli:main"
+apri-py-p7m = "apri_p7m.cli:main"
 
 [tool.setuptools]
-packages = ["sbusta_p7m"]
+packages = ["apri_p7m"]

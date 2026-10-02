@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.tmia.sbustap7m"
+    namespace = "com.tmia.aprip7m"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.tmia.sbustap7m"
+        applicationId = "com.tmia.aprip7m"
         minSdk = 26
         targetSdk = 37
         versionCode = 3
@@ -22,19 +22,19 @@ android {
     // signed release outside CI.
     signingConfigs {
         create("release") {
-            val keystorePath = System.getenv("SBUSTA_P7M_KEYSTORE_PATH")
+            val keystorePath = System.getenv("APRI_P7M_KEYSTORE_PATH")
             if (keystorePath != null) {
                 storeFile = file(keystorePath)
-                storePassword = System.getenv("SBUSTA_P7M_KEYSTORE_PASSWORD")
-                keyAlias = "sbusta-p7m"
-                keyPassword = System.getenv("SBUSTA_P7M_KEYSTORE_PASSWORD")
+                storePassword = System.getenv("APRI_P7M_KEYSTORE_PASSWORD")
+                keyAlias = "apri-p7m"
+                keyPassword = System.getenv("APRI_P7M_KEYSTORE_PASSWORD")
             }
         }
     }
 
     buildTypes {
         release {
-            if (System.getenv("SBUSTA_P7M_KEYSTORE_PATH") != null) {
+            if (System.getenv("APRI_P7M_KEYSTORE_PATH") != null) {
                 signingConfig = signingConfigs.getByName("release")
             }
         }

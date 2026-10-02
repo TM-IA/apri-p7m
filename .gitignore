@@ -12,7 +12,7 @@
 /build-linux/work
 /build-linux/.venv
 /build-linux/*.spec
-/sbusta_p7m.egg-info
+/apri_p7m.egg-info
 /android-app/**/build
 /android-app/.gradle
 /android-app/local.properties

@@ -1,4 +1,4 @@
-package com.tmia.sbustap7m.cms
+package com.tmia.aprip7m.cms
 
 import org.bouncycastle.asn1.ASN1ObjectIdentifier
 import org.bouncycastle.asn1.cms.CMSAttributes
@@ -14,7 +14,7 @@ import java.util.Locale
 import java.util.TimeZone
 
 /**
- * Kotlin port of sbusta_p7m/core.py (Python). Mirrors it field for
+ * Kotlin port of apri_p7m/core.py (Python). Mirrors it field for
  * field: same "firmatari" schema (including the "livello" field, one
  * entry per SignerInfo — several co-signers in one layer contribute
  * several entries), same iterative unwrapping of nested envelopes
@@ -60,7 +60,7 @@ private fun isoFormat(): SimpleDateFormat =
  * Extracts the embedded PDF and signer metadata from a DER-encoded
  * .p7m (CMS SignedData) envelope, unwrapping nested envelopes when the
  * embedded content is itself another CMS SignedData, until the raw
- * PDF emerges — same logic as sbusta_p7m.core.estrai().
+ * PDF emerges — same logic as apri_p7m.core.estrai().
  *
  * @param nomeFile used only for error messages (matches the Python
  *   side's error text, which names the file).
