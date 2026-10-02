@@ -1,9 +1,9 @@
 import Foundation
 
 /// Batch extraction log — unlike the Platypus wrapper (which wrote
-/// sbusta-p7m-log.txt inside the destination folder of each run), this
+/// apri-p7m-log.txt inside the destination folder of each run), this
 /// lives at a single fixed location alongside preferenze.json
-/// (~/Library/Application Support/sbusta-p7m/sbusta-p7m-log.txt),
+/// (~/Library/Application Support/apri-p7m/apri-p7m-log.txt),
 /// independent of where any given extraction's output goes. Deliberate
 /// behavior change, decided with the user: a fixed log location is what
 /// makes a dedicated "apri cartella di log" button meaningful, decoupled
@@ -11,7 +11,7 @@ import Foundation
 /// batch's actual output folder, and can differ run to run).
 public enum LogEstrazione {
     public static func percorso() -> URL {
-        Preferenze.cartellaDati().appendingPathComponent("sbusta-p7m-log.txt")
+        Preferenze.cartellaDati().appendingPathComponent("apri-p7m-log.txt")
     }
 
     private static let formattatoreTimestamp: DateFormatter = {

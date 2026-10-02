@@ -1,7 +1,7 @@
 import Foundation
 
 /// One signer entry ("firmatario"). Field names and JSON keys mirror
-/// sbusta_p7m/core.py exactly (see its docstring for the schema) and the
+/// apri_p7m/core.py exactly (see its docstring for the schema) and the
 /// Kotlin port (Estrazione.kt's `Firmatario`) — every field is present in
 /// the encoded JSON even when unresolved (encoded as `null`, never
 /// omitted), matching both other implementations.
@@ -48,7 +48,7 @@ public struct Firmatario: Codable {
 }
 
 /// Result of `estrai(percorsoP7m:)`: the extracted content bytes plus the
-/// metadata dict, same schema as `sbusta_p7m.core.estrai()` (Python) and
+/// metadata dict, same schema as `apri_p7m.core.estrai()` (Python) and
 /// `RisultatoEstrazione` (Kotlin). `Metadata` alone is what gets encoded
 /// to the sidecar `.json` file; the extracted bytes are written to the
 /// `.pdf` file separately by the caller (naming/writing is not this

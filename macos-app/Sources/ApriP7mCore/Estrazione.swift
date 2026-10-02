@@ -1,7 +1,7 @@
 import Foundation
 import Security
 
-/// Swift port of sbusta_p7m/core.py (and, in spirit, of the Kotlin port
+/// Swift port of apri_p7m/core.py (and, in spirit, of the Kotlin port
 /// Estrazione.kt) — same "firmatari" schema (including "livello", one
 /// entry per SignerInfo, several co-signers on one layer contribute
 /// several entries sharing that livello), same iterative unwrapping of
@@ -208,7 +208,7 @@ private func metadataFirmatariLivello(_ decodificato: LivelloDecodificato, algor
 /// .p7m (CMS SignedData) envelope, unwrapping nested envelopes when the
 /// embedded content is itself another CMS SignedData (a document signed
 /// more than once, e.g. "file.pdf.p7m.p7m") until the raw PDF emerges —
-/// same logic as sbusta_p7m.core.estrai().
+/// same logic as apri_p7m.core.estrai().
 public func estrai(percorsoP7m: String) throws -> RisultatoEstrazione {
     var dati = try Data(contentsOf: URL(fileURLWithPath: percorsoP7m))
     let nomeFile = (percorsoP7m as NSString).lastPathComponent

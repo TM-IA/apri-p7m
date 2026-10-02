@@ -1,16 +1,16 @@
 import SwiftUI
 import AppKit
-import SbustaP7mCore
+import ApriP7mCore
 
 // First testable vertical slice of the macOS Swift rewrite: enough UI to
 // pick file(s)/folder(s), run the real extraction+writing pipeline
-// (SbustaP7mCore.elaboraFile), and see the result. Deliberately minimal —
+// (ApriP7mCore.elaboraFile), and see the result. Deliberately minimal —
 // the full wizard/preferences UI from plan step 1.3 (three-level
 // navigation, dedicated destination dialog, Preferences window, help)
 // is not implemented yet.
 
 @main
-struct SbustaP7mMacApp: App {
+struct ApriP7mMacApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -32,7 +32,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("sbusta-p7m").font(.title)
+            Text("apri-p7m").font(.title)
             Text("Estrae il PDF e i metadati del firmatario da una busta .p7m (CMS/PKCS#7).")
                 .foregroundColor(.secondary)
 

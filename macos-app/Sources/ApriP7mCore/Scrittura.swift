@@ -1,6 +1,6 @@
 import Foundation
 
-/// Port of sbusta_p7m/cli.py's naming (_stem_senza_p7m, _nomi_output)
+/// Port of apri_p7m/cli.py's naming (_stem_senza_p7m, _nomi_output)
 /// and per-file writing (_elabora_file) logic. Unlike the CLI, this
 /// returns a structured result instead of printing to stdout/stderr —
 /// there is no subprocess boundary to cross here (in-process, same app),

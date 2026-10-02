@@ -1,12 +1,12 @@
 import XCTest
-@testable import SbustaP7mCore
+@testable import ApriP7mCore
 
 /// Mirrors EstrazioneTest.kt (Android): pure library tests, no UI
 /// involved. Fixtures under Resources/ are shared 1:1 with the Android
 /// test suite (test-busta.p7m, test-busta-cofirmatari.p7m — same bytes,
 /// copied verbatim) plus two fixtures added for this plan's extra
 /// coverage (test-busta-annidata.p7m, test-busta-detached.p7m). Expected
-/// values below were captured by running sbusta_p7m.core.estrai() on
+/// values below were captured by running apri_p7m.core.estrai() on
 /// these exact files (Python, ground truth) before writing this suite —
 /// see project-docs/status/macos-swift.md.
 final class EstrazioneTests: XCTestCase {

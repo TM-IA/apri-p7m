@@ -1,10 +1,10 @@
 import SwiftUI
 import AppKit
-import SbustaP7mCore
+import ApriP7mCore
 
 /// Preferences window: reads/writes 2 of the 3 keys the Platypus
 /// wrapper's Preferenze dialog exposed (destinazione, log), same file
-/// (Preferenze.swift → ~/Library/Application Support/sbusta-p7m/preferenze.json).
+/// (Preferenze.swift → ~/Library/Application Support/apri-p7m/preferenze.json).
 /// `modalita` (File/Cartella/Chiedi) is deliberately not exposed here:
 /// it only existed to work around AppleScript's 3-button dialog limit
 /// (a fixed mode let the wrapper skip asking File-or-Cartella so a

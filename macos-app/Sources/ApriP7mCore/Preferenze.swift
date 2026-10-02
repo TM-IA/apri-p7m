@@ -1,6 +1,6 @@
 import Foundation
 
-/// Preference keys — same 3-key contract as sbusta_p7m/preferenze.py's
+/// Preference keys — same 3-key contract as apri_p7m/preferenze.py's
 /// _CHIAVI_VALIDE, represented as a Swift enum instead of a runtime
 /// string-set check: the type system already rules out the "unknown key"
 /// case Python guards against with a ValueError, so no equivalent
@@ -17,10 +17,10 @@ public enum ChiavePreferenza: String {
     case apriDestinazioneAutomaticamente
 }
 
-/// Swift port of sbusta_p7m/preferenze.py. This package targets macOS
+/// Swift port of apri_p7m/preferenze.py. This package targets macOS
 /// only (see Package.swift), so only the darwin branch of the Python
 /// module is ported — same file
-/// (~/Library/Application Support/sbusta-p7m/preferenze.json), same flat
+/// (~/Library/Application Support/apri-p7m/preferenze.json), same flat
 /// JSON schema, same semantics (an empty value removes the key instead
 /// of persisting an empty string). Reading and writing this exact file
 /// keeps a user's preferences intact across the switch from the Platypus
@@ -30,7 +30,7 @@ public enum Preferenze {
 
     public static func cartellaConfig() -> URL {
         FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Application Support/sbusta-p7m", isDirectory: true)
+            .appendingPathComponent("Library/Application Support/apri-p7m", isDirectory: true)
     }
 
     // macOS convention: one Application Support folder for both config

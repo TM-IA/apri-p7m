@@ -1,6 +1,6 @@
 import Foundation
 
-/// Same two-way error distinction as sbusta_p7m.core.py's
+/// Same two-way error distinction as apri_p7m.core.py's
 /// P7mFormatError/P7mContentError (and the Kotlin port's equivalent
 /// classes) — no shared base type is needed on the Swift side beyond
 /// `Error` conformance, callers switch on the concrete case.
